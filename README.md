@@ -1,7 +1,7 @@
 # mpv-morden-x-compact
 Compact version of morden-x osc for mpv with a neat web-player type UI
 
-![Screenshot_114](https://user-images.githubusercontent.com/70870070/176439021-5cea7409-5cae-4ccf-9a34-eb57fb1ed852.png)
+![preview](https://raw.githubusercontent.com/1-minute-to-midnight/mpv-morden-x-compact/main/preview.png)
 
 # How to install
 Put the .lua file into "~~/scripts/" folder, and remove other osc scripts.
@@ -10,7 +10,7 @@ Change the following setting in mpv.conf :
 
 `osc=no`
 
-:warning: **Important**: Install dexeonify's custom-made icon font ![modernx-osc-icon.ttf](https://github.com/dexeonify/mpv-config/raw/main/modernx-osc-icon.ttf) for the OSC icons or create a folder folder named fonts in the mpv config folder and drop the ttf file in there.
+:warning: **Important**: Install dexeonify's custom-made icon font ![modernx-osc-icon.ttf](https://github.com/1-minute-to-midnight/mpv-morden-x-compact/raw/main/modernx-osc-icon.ttf) for the OSC icons or create a folder folder named fonts in the mpv config folder and drop the ttf file in there.
 
 # Configuration
 You can change various options like accent color by editing osc.conf which should be put in the "~~/scripts-opts/" folder. The usage/creation of this file is optional if you want to use the config as is.
