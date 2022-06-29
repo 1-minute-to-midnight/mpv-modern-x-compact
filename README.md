@@ -6,7 +6,7 @@ Compact version of morden-x osc for mpv with a neat web-player type UI
 # How to install
 Put the .lua file into "~~/scripts/" folder, and remove other osc scripts.
 
-Change the following setting in mpv.conf :
+Set the following setting in mpv.conf :
 
 `osc=no`
 
