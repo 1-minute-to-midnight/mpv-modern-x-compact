@@ -1,5 +1,5 @@
 # mpv-modern-x-compact
-Compact version of morden-x osc for mpv with a neat web-player type UI
+Compact version of modern-x osc for mpv with a neat web-player type UI
 
 ![preview](https://raw.githubusercontent.com/1-minute-to-midnight/mpv-morden-x-compact/main/preview.png)
 
@@ -26,4 +26,4 @@ By line 1675 you will see various titles indicating each element (Seekbar, Title
 # Credits
 - ![Dexeonify's Personal Config](https://github.com/dexeonify/mpv-config)
 
-- ![Maoiscat's Morden Layout](https://github.com/maoiscat/mpv-osc-morden)
+- ![Maoiscat's Modern Layout](https://github.com/maoiscat/mpv-osc-morden)
