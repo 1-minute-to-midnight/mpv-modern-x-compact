@@ -1,4 +1,4 @@
-# mpv-morden-x-compact
+# mpv-modern-x-compact
 Compact version of morden-x osc for mpv with a neat web-player type UI
 
 ![preview](https://raw.githubusercontent.com/1-minute-to-midnight/mpv-morden-x-compact/main/preview.png)
