@@ -17,6 +17,9 @@ You can change various options like accent color by editing osc.conf which shoul
 
 If you want to change the height of the seekbar or want to change the positions of various elements:
 By line 1675 you will see various titles indicating each element (Seekbar, Title, Playback control buttons etc.). To move the elements horizontally (along x-axis), add or subtract values to refX or x values. Similar process can be done for y values to move it vertically (along y-axis).
+
+## Thumbnail Support
+For thumbnail support drop the thumbnail .lua file into the scripts folder
  
 # Fonts
 - ![Manrope](https://github.com/sharanda/manrope)
