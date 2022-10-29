@@ -622,6 +622,12 @@ local state = {
     subpos = 100,                           -- last value of sub-pos set by the user
 }
 
+local thumbfast = {
+    width = 0,
+    height = 0,
+    disabled = false
+}
+
 local window_control_box_width = 80
 local tick_delay = 0.03
 
@@ -1243,9 +1249,42 @@ function render_elements(master_ass)
                     ass_append_alpha(elem_ass, slider_lo.alpha, 0)
                     elem_ass:append(tooltiplabel)
 
-                    display_tn_osc(ty, sliderpos, elem_ass)
+                    -- thumbnail
+                    if thumbfast.width ~= 0 and thumbfast.height ~= 0 then
+                        local osd_w = mp.get_property_number("osd-dimensions/w")
+                        if osd_w and not thumbfast.disabled then
+                            local r_w, r_h = get_virt_scale_factor()
+
+                            local thumbPad = 4
+                            local thumbMarginX = 18 / r_w
+                            local thumbMarginY = 40
+                            local tooltipBgColor = "FFFFFF"
+                            local tooltipBgAlpha = 80
+                            local thumbX = math.min(osd_w - thumbfast.width - thumbMarginX, math.max(thumbMarginX, tx / r_w - thumbfast.width / 2))
+                            local thumbY = ((ty - thumbMarginY) / r_h - thumbfast.height)
+
+                            elem_ass:new_event()
+                            elem_ass:pos(thumbX * r_w, ty - thumbMarginY - thumbfast.height * r_h)
+                            elem_ass:append(("{\\bord0\\1c&H%s&\\1a&H%X&}"):format(tooltipBgColor, tooltipBgAlpha))
+                            elem_ass:draw_start()
+                            elem_ass:rect_cw(-thumbPad * r_h, -thumbPad * r_h, (thumbfast.width + thumbPad) * r_w, (thumbfast.height + thumbPad) * r_h)
+                            elem_ass:draw_stop()
+
+                            mp.commandv("script-message-to", "thumbfast", "thumb",
+                                mp.get_property_number("duration", 0) * (sliderpos / 100),
+                                thumbX,
+                                thumbY
+                            )
+                        end
+                    else
+                        display_tn_osc(ty, sliderpos, elem_ass)
+                    end
                 else
-                    hide_thumbnail()
+                    if thumbfast.width ~= 0 and thumbfast.height ~= 0 then
+                        mp.commandv("script-message-to", "thumbfast", "clear")
+                    else
+                        hide_thumbnail()
+                    end
                 end
             end
 
@@ -2950,6 +2989,16 @@ mp.register_script_message("osc-visibility", visibility_mode)
 mp.add_key_binding(nil, "visibility", function() visibility_mode("cycle") end)
 
 mp.register_script_message("osc-idlescreen", idlescreen_visibility)
+
+mp.register_script_message("thumbfast-info", function(json)
+    local data = utils.parse_json(json)
+    if type(data) ~= "table" or not data.width or not data.height then
+        msg.error("thumbfast-info: received json didn't produce a table with thumbnail information")
+    else
+        thumbfast = data
+        mp.command_native({"script-message", message.osc.finish, format_json(osc_reg)})
+    end
+end)
 
 set_virt_mouse_area(0, 0, 0, 0, "input")
 set_virt_mouse_area(0, 0, 0, 0, "window-controls")
