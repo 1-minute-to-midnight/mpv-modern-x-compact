@@ -29,7 +29,9 @@ By line 1675 you will see various titles indicating each element (Seekbar, Title
 
 ## Thumbnail Support
 For thumbnail support drop the thumbnail .lua files into the scripts folder
+
 OR
+
 Go to ![thumbfast](https://github.com/po5/thumbfast) and drop thumbfast.lua into scripts folder
  
 # Fonts
