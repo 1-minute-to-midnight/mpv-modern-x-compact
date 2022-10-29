@@ -29,6 +29,8 @@ By line 1675 you will see various titles indicating each element (Seekbar, Title
 
 ## Thumbnail Support
 For thumbnail support drop the thumbnail .lua files into the scripts folder
+OR
+Go to ![thumbfast](https://github.com/po5/thumbfast) and drop thumbfast.lua into scripts folder
  
 # Fonts
 - ![Manrope](https://github.com/sharanda/manrope)
@@ -39,3 +41,5 @@ For thumbnail support drop the thumbnail .lua files into the scripts folder
 - ![Dexeonify's Personal Config](https://github.com/dexeonify/mpv-config)
 
 - ![Maoiscat's Modern Layout](https://github.com/maoiscat/mpv-osc-morden)
+
+- ![po5's Thumbfast Thumbnailer](https://github.com/po5/thumbfast)
