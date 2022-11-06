@@ -625,7 +625,8 @@ local state = {
 local thumbfast = {
     width = 0,
     height = 0,
-    disabled = false
+    disabled = true,
+    available = false
 }
 
 local window_control_box_width = 80
@@ -1250,8 +1251,8 @@ function render_elements(master_ass)
                     elem_ass:append(tooltiplabel)
 
                     -- thumbnail
-                    if thumbfast.width ~= 0 and thumbfast.height ~= 0 then
-                        local osd_w = mp.get_property_number("osd-dimensions/w")
+                    if thumbfast.available then
+                        local osd_w = mp.get_property_number("osd-width")
                         if osd_w and not thumbfast.disabled then
                             local r_w, r_h = get_virt_scale_factor()
 
@@ -1270,7 +1271,7 @@ function render_elements(master_ass)
                         display_tn_osc(ty, sliderpos, elem_ass)
                     end
                 else
-                    if thumbfast.width ~= 0 and thumbfast.height ~= 0 then
+                    if thumbfast.available then
                         mp.commandv("script-message-to", "thumbfast", "clear")
                     else
                         hide_thumbnail()
