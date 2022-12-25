@@ -10,7 +10,7 @@ Set the following setting in mpv.conf :
 
 `osc=no`
 
-:warning: **Important**: Install dexeonify's custom-made icon font ![modernx-osc-icon.ttf](https://github.com/1-minute-to-midnight/mpv-morden-x-compact/raw/main/modernx-osc-icon.ttf) for the OSC icons or create a folder folder named fonts in the mpv config folder and drop the ttf file in there.
+:warning: **Important**: Install dexeonify's custom-made icon font [modernx-osc-icon.ttf](https://github.com/1-minute-to-midnight/mpv-morden-x-compact/raw/main/modernx-osc-icon.ttf) for the OSC icons or create a folder folder named fonts in the mpv config folder and drop the ttf file in there.
 
 # Configuration
 You can change various options like accent color by editing osc.conf which should be put in the "~~/scripts-opts/" folder. The usage/creation of this file is optional if you want to use the config as is.
@@ -32,16 +32,16 @@ For thumbnail support drop the thumbnail .lua files into the scripts folder
 
 OR
 
-Go to ![thumbfast](https://github.com/po5/thumbfast) and drop thumbfast.lua into scripts folder
+Go to [thumbfast](https://github.com/po5/thumbfast) and drop thumbfast.lua into scripts folder
  
 # Fonts
-- ![Manrope](https://github.com/sharanda/manrope)
+- [Manrope](https://github.com/sharanda/manrope)
 
 (Change osd-font in "~~mpv.conf" to get like it is in the screenshot)
 
 # Credits
-- ![Dexeonify's Personal Config](https://github.com/dexeonify/mpv-config)
+- [Dexeonify's Personal Config](https://github.com/dexeonify/mpv-config)
 
-- ![Maoiscat's Modern Layout](https://github.com/maoiscat/mpv-osc-morden)
+- [Maoiscat's Modern Layout](https://github.com/maoiscat/mpv-osc-morden)
 
-- ![po5's Thumbfast Thumbnailer](https://github.com/po5/thumbfast)
+- [po5's Thumbfast Thumbnailer](https://github.com/po5/thumbfast)
