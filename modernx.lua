@@ -1259,7 +1259,7 @@ function render_elements(master_ass)
                             local thumbPad = 4
                             local thumbMarginX = 18 / r_w
                             local thumbMarginY = 40
-                            local tooltipBgColor = "FFFFFF"
+                            local tooltipBgColor = "000000"
                             local tooltipBgAlpha = 80
                             local thumbX = math.min(osd_w - thumbfast.width - thumbMarginX, math.max(thumbMarginX, tx / r_w - thumbfast.width / 2))
                             local thumbY = ((ty - thumbMarginY) / r_h - thumbfast.height)
