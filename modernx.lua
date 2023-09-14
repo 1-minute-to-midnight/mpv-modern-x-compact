@@ -8,6 +8,9 @@
 -- forked again by dexeonify
 -- https://github.com/dexeonify/mpv-config/blob/main/scripts/modernx.lua
 
+-- forked once again by 1-minute-to-midnight
+-- https://github.com/1-minute-to-midnight/mpv-modern-x-compact/
+
 local ipairs,loadfile,pairs,pcall,tonumber,tostring = ipairs,loadfile,pairs,pcall,tonumber,tostring
 local debug,io,math,os,string,table,utf8 = debug,io,math,os,string,table,utf8
 local min,max,floor,ceil,huge = math.min,math.max,math.floor,math.ceil,math.huge
@@ -23,56 +26,56 @@ local utils   = require 'mp.utils'
 -- default user option values
 -- do not touch, change them in osc.conf
 local user_opts = {
-    showwindowed = true,        -- show OSC when windowed?
-    showfullscreen = true,      -- show OSC when fullscreen?
-    idlescreen = true,          -- show mpv logo on idle
-    scalewindowed = 1,          -- scaling of the controller when windowed
-    scalefullscreen = 1,        -- scaling of the controller when fullscreen
-    scaleforcedwindow = 1.5,    -- scaling when rendered on a forced window
-    vidscale = true,            -- scale the controller with the video?
-    barmargin = 0,              -- vertical margin of top/bottombar
-    boxalpha = 80,              -- alpha of the background box,
-                                -- 0 (opaque) to 255 (fully transparent)
-    hidetimeout = 500,          -- duration in ms until the OSC hides if no
-                                -- mouse movement. enforced non-negative for the
-                                -- user, but internally negative is "always-on".
-    fadeduration = 200,         -- duration of fade out in ms, 0 = no fade
-    deadzonesize = 0.5,         -- size of deadzone
-    minmousemove = 0,           -- minimum amount of pixels the mouse has to
-                                -- move between ticks to make the OSC show up
-    iamaprogrammer = false,     -- use native mpv values and disable OSC
-                                -- internal track list management (and some
-                                -- functions that depend on it)
-    layout = "modernx",         -- set thumbnail layout
-    seekbarhandlesize = 0.6,    -- size ratio of the knob handle
-    seekrangealpha = 64,        -- transparency of seekranges
-    seekbarkeyframes = true,    -- use keyframes when dragging the seekbar
-    title = "${media-title}",   -- string compatible with property-expansion
-                                -- to be shown as OSC title
-    tooltipborder = 1,          -- border of tooltip in bottom/topbar
-    timetotal = false,          -- display total time instead of remaining time?
-    timems = false,             -- display timecodes with milliseconds?
-    visibility = "auto",        -- only used at init to set visibility_mode(...)
-    windowcontrols = "auto",    -- whether to show window controls
+    showwindowed = true,                -- show OSC when windowed?
+    showfullscreen = true,              -- show OSC when fullscreen?
+    idlescreen = true,                  -- show mpv logo on idle
+    scalewindowed = 1,                  -- scaling of the controller when windowed
+    scalefullscreen = 1,                -- scaling of the controller when fullscreen
+    scaleforcedwindow = 1.5,            -- scaling when rendered on a forced window
+    vidscale = true,                    -- scale the controller with the video?
+    barmargin = 0,                      -- vertical margin of top/bottombar
+    boxalpha = 80,                      -- alpha of the background box,
+                                        -- 0 (opaque) to 255 (fully transparent)
+    hidetimeout = 500,                  -- duration in ms until the OSC hides if no
+                                        -- mouse movement. enforced non-negative for the
+                                        -- user, but internally negative is "always-on".
+    fadeduration = 200,                 -- duration of fade out in ms, 0 = no fade
+    deadzonesize = 0.5,                 -- size of deadzone
+    minmousemove = 0,                   -- minimum amount of pixels the mouse has to
+                                        -- move between ticks to make the OSC show up
+    iamaprogrammer = false,             -- use native mpv values and disable OSC
+                                        -- internal track list management (and some
+                                        -- functions that depend on it)
+    layout = "modernx",                 -- set thumbnail layout
+    seekbarhandlesize = 0.6,            -- size ratio of the knob handle
+    seekrangealpha = 64,                -- transparency of seekranges
+    seekbarkeyframes = true,            -- use keyframes when dragging the seekbar
+    title = "${media-title}",           -- string compatible with property-expansion
+                                        -- to be shown as OSC title
+    tooltipborder = 1,                  -- border of tooltip in bottom/topbar
+    timetotal = false,                  -- display total time instead of remaining time?
+    timems = false,                     -- display timecodes with milliseconds?
+    visibility = "auto",                -- only used at init to set visibility_mode(...)
+    windowcontrols = "auto",            -- whether to show window controls
     windowcontrols_alignment = "right", -- which side to show window controls on
-    greenandgrumpy = false,     -- disable santa hat
-    livemarkers = true,         -- update seekbar chapter markers on duration change
-    chapters_osd = true,        -- whether to show chapters OSD on next/prev
-    playlist_osd = true,        -- whether to show playlist OSD on next/prev
-    chapter_fmt = "Chapter: %s", -- chapter print format for seekbar-hover. "no" to disable
-
-    showtitle = true,           -- show title in OSC
-    showonpause = true,         -- show OSC on pause
-    showonstart = true,         -- show OSC on startup or when the next file in
-                                -- playlist starts playing
-    showonseek = false,         -- show OSC when seeking
-    movesub = true,             -- move subtitles when the OSC is visible
-    titlefont = "",             -- font used for the title above OSC and
-                                -- in the window controls bar
-    blur_intensity = 150,       -- adjust the strength of the OSC blur
-    osc_color = "000000",       -- accent of the OSC and the title bar
-    seekbarfg_color = "E39C42", -- color of the seekbar progress and handle
-    seekbarbg_color = "FFFFFF", -- color of the remaining seekbar
+    windowcontrols_title = true,        -- whether to show the title with the window controls
+    greenandgrumpy = false,             -- disable santa hat
+    livemarkers = true,                 -- update seekbar chapter markers on duration change
+    chapters_osd = true,                -- whether to show chapters OSD on next/prev
+    playlist_osd = true,                -- whether to show playlist OSD on next/prev
+    chapter_fmt = "Chapter: %s",        -- chapter print format for seekbar-hover. "no" to disable
+    showtitle = true,                   -- show title in OSC
+    showonpause = true,                 -- show OSC on pause
+    showonstart = true,                 -- show OSC on startup or when the next file in
+                                        -- playlist starts playing
+    showonseek = false,                 -- show OSC when seeking
+    movesub = true,                     -- move subtitles when the OSC is visible
+    titlefont = "",                     -- font used for the title above OSC and
+                                        -- in the window controls bar
+    blur_intensity = 150,               -- adjust the strength of the OSC blur
+    osc_color = "000000",               -- accent of the OSC and the title bar
+    seekbarfg_color = "E39C42",         -- color of the seekbar progress and handle
+    seekbarbg_color = "FFFFFF",         -- color of the remaining seekbar
 }
 
 -- read options from config and command-line
@@ -941,6 +944,8 @@ function window_controls_enabled()
     val = user_opts.windowcontrols
     if val == "auto" then
         return not state.border
+    elseif val == "fullscreen_only" then
+        return (not state.border) or state.fullscreen
     else
         return val ~= "no"
     end
@@ -1640,27 +1645,29 @@ function window_controls()
     add_area("showhide_wc", wc_geo.x, sh_area_y0, wc_geo.w, sh_area_y1)
 
     -- Window Title
-    ne = new_element("wctitle", "button")
-    ne.content = function ()
-        local title = mp.command_native({"expand-text", user_opts.title})
-        -- escape ASS, and strip newlines and trailing slashes
-        title = title:gsub("\\n", " "):gsub("\\$", ""):gsub("{","\\{")
-        return not (title == "") and title or "mpv"
-    end
-    ne.hoverable = false
-    local left_pad = 5
-    local right_pad = 10
-    lo = add_layout("wctitle")
-    lo.geometry =
-        { x = titlebox_left + left_pad, y = wc_geo.y - 3, an = 1,
-          w = titlebox_w, h = wc_geo.h }
-    lo.style = string.format("%s{\\clip(%f,%f,%f,%f)}",
+    if user_opts.windowcontrols_title then
+        ne = new_element("wctitle", "button")
+        ne.content = function ()
+            local title = mp.command_native({"expand-text", user_opts.title})
+            -- escape ASS, and strip newlines and trailing slashes
+            title = title:gsub("\\n", " "):gsub("\\$", ""):gsub("{","\\{")
+            return not (title == "") and title or "mpv"
+        end
+        ne.hoverable = false
+        local left_pad = 5
+        local right_pad = 10
+        lo = add_layout("wctitle")
+        lo.geometry =
+            { x = titlebox_left + left_pad, y = wc_geo.y - 3, an = 1,
+                w = titlebox_w, h = wc_geo.h }
+        lo.style = string.format("%s{\\clip(%f,%f,%f,%f)}",
         osc_styles.wcTitle,
         titlebox_left + left_pad, wc_geo.y - wc_geo.h,
         titlebox_right - right_pad, wc_geo.y + wc_geo.h)
 
-    add_area("window-controls-title",
+        add_area("window-controls-title",
              titlebox_left, 0, titlebox_right, wc_geo.h)
+    end
 end
 
 --
@@ -1815,6 +1822,7 @@ end
 -- Validate string type user options
 function validate_user_opts()
     if user_opts.windowcontrols ~= "auto" and
+       user_opts.windowcontrols ~= "fullscreen_only" and
        user_opts.windowcontrols ~= "yes" and
        user_opts.windowcontrols ~= "no" then
         msg.warn("windowcontrols cannot be \"" ..
