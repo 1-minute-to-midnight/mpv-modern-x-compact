@@ -10,7 +10,7 @@ Set the following setting in mpv.conf :
 
 `osc=no`
 
-:warning: **Important**: Install dexeonify's custom-made icon font [modernx-osc-icon.ttf](https://github.com/1-minute-to-midnight/mpv-morden-x-compact/raw/main/modernx-osc-icon.ttf) for the OSC icons or create a folder folder named fonts in the mpv config folder and drop the ttf file in there.
+:warning: **Important**: Install [dexeonify's](https://github.com/dexeonify/mpv-config/) custom-made [ModernX OSC font](https://github.com/1-minute-to-midnight/mpv-morden-x-compact/raw/main/modernx-osc-icon.ttf) for the OSC icons or create a folder named `fonts` in the mpv config folder and drop the ttf file in there.
 
 # Configuration
 You can change various options like accent color by editing osc.conf which should be put in the "~~/script-opts/" folder. The usage/creation of this file is optional if you want to use the config as is.
