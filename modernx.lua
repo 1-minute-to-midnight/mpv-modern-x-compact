@@ -2278,19 +2278,52 @@ function osc_init()
     prepare_elements()
 end
 
+function reset_margins()
+    if state.using_video_margins then
+        for _, opt in ipairs(margins_opts) do
+            mp.set_property_number(opt[2], 0.0)
+        end
+        state.using_video_margins = false
+    end
+end
+
 function update_margins()
     local margins = osc_param.video_margins
 
     -- Don't use margins if it's visible only temporarily.
-    if (not state.osc_visible) or
+    if (not state.osc_visible) or (get_hidetimeout() >= 0) or
        (state.fullscreen and not user_opts.showfullscreen) or
        (not state.fullscreen and not user_opts.showwindowed)
     then
         margins = {l = 0, r = 0, t = 0, b = 0}
     end
 
-    utils.shared_script_property_set("osc-margins",
-        string.format("%f,%f,%f,%f", margins.l, margins.r, margins.t, margins.b))
+    if user_opts.boxvideo then
+        -- check whether any margin option has a non-default value
+        local margins_used = false
+
+        if not state.using_video_margins then
+            for _, opt in ipairs(margins_opts) do
+                if mp.get_property_number(opt[2], 0.0) ~= 0.0 then
+                    margins_used = true
+                end
+            end
+        end
+
+        if not margins_used then
+            for _, opt in ipairs(margins_opts) do
+                local v = margins[opt[1]]
+                if (v ~= 0) or state.using_video_margins then
+                    mp.set_property_number(opt[2], v)
+                    state.using_video_margins = true
+                end
+            end
+        end
+    else
+        reset_margins()
+    end
+
+    mp.set_property_native("user-data/osc/margins", margins)
 end
 
 --
@@ -2953,7 +2986,7 @@ function visibility_mode(mode, no_osd)
     end
 
     user_opts.visibility = mode
-    utils.shared_script_property_set("osc-visibility", mode)
+    mp.set_property_native("user-data/osc/visibility", mode)
 
     if not no_osd and tonumber(mp.get_property("osd-level")) >= 1 then
         mp.osd_message("OSC visibility: " .. mode)
@@ -2985,7 +3018,7 @@ function idlescreen_visibility(mode, no_osd)
         user_opts.idlescreen = false
     end
 
-    utils.shared_script_property_set("osc-idlescreen", mode)
+    mp.set_property_native("user-data/osc/idlescreen", user_opts.idlescreen)
 
     if not no_osd and tonumber(mp.get_property("osd-level")) >= 1 then
         mp.osd_message("OSC logo visibility: " .. tostring(mode))
