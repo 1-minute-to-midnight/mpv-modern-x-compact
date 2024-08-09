@@ -2300,6 +2300,11 @@ function osc_init()
             end
         end
 
+    ne.eventresponder["mbtn_right_up"] =
+    function ()
+        mp.set_property("speed", 1.0)
+    end
+
 ne.eventresponder["wheel_up_press"] =
     function () mp.commandv("osd-auto", "add", "speed", 0.1) end
 ne.eventresponder["wheel_down_press"] =
