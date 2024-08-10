@@ -2310,9 +2310,9 @@ function osc_init()
     end
 
 ne.eventresponder["wheel_up_press"] =
-    function () mp.commandv("osd-auto", "add", "speed", 0.1) end
+    function () mp.commandv("osd-auto", "add", "speed", 0.25) end
 ne.eventresponder["wheel_down_press"] =
-    function () mp.commandv("osd-auto", "add", "speed", -0.1) end
+    function () mp.commandv("osd-auto", "add", "speed", -0.25) end
     -- load layout
     layout()
 
