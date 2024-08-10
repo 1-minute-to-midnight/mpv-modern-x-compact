@@ -1822,7 +1822,7 @@ function layout()
 
     -- Playback Speed
     lo = add_layout("playback_speed")
-    lo.geometry = {x = osc_geo.w - 142, y = refY - 20, an = 5, w = 24, h = 24}
+    lo.geometry = {x = osc_geo.w - 147, y = refY - 20, an = 5, w = 24, h = 24}
     lo.style = osc_styles.smallButtons
 
     -- Toggle fullscreen
@@ -2285,20 +2285,24 @@ function osc_init()
 
     ne.content = function()
         local speed = mp.get_property_number("speed", 1.0)
-        return string.format("%.1fx", speed)
+        return string.format("%.2fx", speed)
     end
 
     ne.eventresponder["mbtn_left_up"] =
-        function ()
-            local current_speed = mp.get_property_number("speed", 1.0)
-            if current_speed == 1.0 then
-                mp.set_property("speed", 1.5)
-            elseif current_speed == 1.5 then
-                mp.set_property("speed", 2.0)
-            elseif current_speed == 2.0 then
-                mp.set_property("speed", 1.0)
+    function ()
+        local speeds = {1.0, 1.25, 1.5, 1.75, 2.0}  -- List of playback speeds
+        local current_speed = mp.get_property_number("speed", 1.0)
+        local next_speed = speeds[1]  -- Default to the first speed in case current speed isn't found
+        
+        for i = 1, #speeds do
+            if current_speed == speeds[i] then
+                next_speed = speeds[(i % #speeds) + 1]
+                break
             end
         end
+        
+        mp.set_property("speed", next_speed)
+    end
 
     ne.eventresponder["mbtn_right_up"] =
     function ()
